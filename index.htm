@@ -1,7 +1,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('/sw.js')
+      .register('./sw.js')
       .then(() => {
         console.log('Service worker registered')
       })
@@ -45,7 +45,7 @@
 
   function subscribeUserToPush() {
   return navigator.serviceWorker
-    .register('/sw.js')
+    .register('./sw.js')
     .then(function (registration) {
       const subscribeOptions = {
         userVisibleOnly: true,
