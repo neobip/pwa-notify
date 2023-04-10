@@ -44,7 +44,7 @@ self.addEventListener('push', async function (event) {
     console.log(data);
     const title = 'Sound Notification';
     const options = {
-      sound: '../public/messageNotification.mp3',
+      sound: './notif.mp3',
     };
   
     try {
