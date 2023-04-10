@@ -56,10 +56,7 @@
       return registration.pushManager.subscribe(subscribeOptions);
     })
     .then(function (pushSubscription) {
-      console.log(
-        'Received PushSubscription: ',
-        JSON.stringify(pushSubscription),
-      );
+      document.body.innerHTML += JSON.stringify(pushSubscription)gi
       return pushSubscription;
     });
 }
