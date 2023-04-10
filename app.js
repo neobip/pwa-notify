@@ -59,7 +59,7 @@ async function updateUI() {
   unregistrationButton.disabled = true;
   subscriptionButton.disabled = true;
   unsubscriptionButton.disabled = true;
-  notifyMeButton.disabled = true;
+  // notifyMeButton.disabled = true;
   // Service worker is not supported so we can't go any further.
   if (!'serviceWorker' in navigator) {
     registrationStatus.textContent = "This browser doesn't support service workers.";
@@ -127,7 +127,7 @@ const urlB64ToUint8Array = (base64String) => {
 
 
 window.onload = updateUI;
-window.onmousemove = updateUI
+window.onchange = updateUI
 
 function notifyMe() {
   const notif = Notification.permission
