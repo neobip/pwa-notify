@@ -44,11 +44,6 @@ self.addEventListener('push', async function (event) {
     console.log(data);
     const title = data
     const options = data
-    let sound;
-    sound = new Audio();
-    sound.src = './notif.mp3';
-    sound.load();
-    sound.play(); 
     try {
         registration.showNotification("Vibration Sample", {
             body: "Buzz! Buzz!",
@@ -56,7 +51,7 @@ self.addEventListener('push', async function (event) {
             tag: "vibration-sample",
           });
         } catch (e) {
-            console.log('errr')
+            console.log('errr',e )
     }
 
   });
