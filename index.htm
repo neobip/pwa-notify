@@ -56,7 +56,7 @@
       return registration.pushManager.subscribe(subscribeOptions);
     })
     .then(function (pushSubscription) {
-      document.body.innerHTML += JSON.stringify(pushSubscription)gi
+      document.body.innerHTML += JSON.stringify(pushSubscription)
       return pushSubscription;
     });
 }
