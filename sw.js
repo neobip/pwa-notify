@@ -50,8 +50,13 @@ self.addEventListener('push', async function (event) {
     sound.load();
     sound.play(); 
     try {
-        registration.showNotification(title, options);
-    } catch (e) {
-      registration.showNotification(title, options);
+        registration.showNotification("Vibration Sample", {
+            body: "Buzz! Buzz!",
+            vibrate: [200, 100, 200, 100, 200, 100, 200],
+            tag: "vibration-sample",
+          });
+        } catch (e) {
+            console.log('errr')
     }
+
   });
