@@ -1,69 +1,47 @@
-<link rel="manifest" href="./manifest.json">
+<!DOCTYPE html>
+<html lang="en">
 
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register('./sw.js')
-      .then(() => {
-        console.log('Service worker registered')
-      })
-      .catch((err) => {
-        console.log('Service worker registration failed: ' + err)
-      })
-  }
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js"></script>
+    <title>PWA - PUSH</title>
+</head>
 
-  function askPermission() {
-    return new Promise(function (resolve, reject) {
-      const permissionResult = Notification.requestPermission(function (
-        result
-      ) {
-        resolve(result)
-      })
+<body>
+    <h1>Push notifications client</h1>
+    <noscript>
+        You have JavaScript disabled. This app requires JavaScript to work.
+    </noscript>
+    <h2>Service worker</h2>
+    <textarea readonly id="registration-status-message">
+This browser doesn't support service workers.
+  </textarea>
+    <button id="register" onclick="registerServiceWorker()" disabled>
+        Register service worker
+    </button>
+    <button id="unregister" onclick="unregisterServiceWorker()" disabled>
+Unregister service worker
+    </button>
+    <h2>Subscripton</h2>
+    <textarea readonly id="subscription-status-message">
+No push subscription is active.</textarea>
+    <button id="subscribe" onclick="subscribeToPush()" disabled>
+Subscribe to push
+    </button>
+    <button id="unsubscribe" onclick="unsubscribeFromPush()" disabled>
+Unsubscribe from push
+    </button>
+    <h2>Notifications</h2>
+    <textarea readonly id="notification-status-message">
+No notifications sent yet.
+    </textarea>
+    <button id="notify-me" onclick="notifyMe()">Notify me</button>
+    <button id="notify-all" onclick="notifyAll()" disabled>Notify all</button>
+    <hr />
+</body>
 
-      if (permissionResult) {
-        permissionResult.then(resolve, reject)
-      }
-    }).then(function (permissionResult) {
-      if (permissionResult !== 'granted') {
-        throw new Error("We weren't granted permission.")
-      }
-    })
-  }
-
-  function urlBase64ToUint8Array(base64String) {
-    var padding = '='.repeat((4 - base64String.length % 4) % 4);
-    var base64 = (base64String + padding)
-        .replace(/\-/g, '+')
-        .replace(/_/g, '/');
-
-    var rawData = window.atob(base64);
-    var outputArray = new Uint8Array(rawData.length);
-
-    for (var i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
-}
-
-  function subscribeUserToPush() {
-  return navigator.serviceWorker
-    .register('./sw.js')
-    .then(function (registration) {
-      const subscribeOptions = {
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          'BBXOiNUgaX5OiKQFzX9FVR3nV9hJe-dEME_M5YJqVH_sQsBj5ur-OtdhJdMoXGfMd9UJHT-Hkple3MdcAc8RX1k'
-          //3niLwfqBANilDpfcd8sffS0bz8Wvs9NBMUYIGkI9u3w
-),
-      };
-      return registration.pushManager.subscribe(subscribeOptions);
-    })
-    .then(function (pushSubscription) {
-      document.body.innerHTML += JSON.stringify(pushSubscription)
-      return pushSubscription;
-    });
-}
-
-</script>
-<input onclick="askPermission()" type="button" value="ask"/>
-<input onclick="subscribeUserToPush()" type="button" value="subscribe"/>
+</html>
