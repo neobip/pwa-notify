@@ -42,11 +42,13 @@ async function get_response(request) {
 self.addEventListener('push', async function (event) {
     const data = event.data.json();
     console.log(data);
-    const title = 'Sound Notification';
-    const options = {
-      sound: './notif.mp3',
-    };
-  
+    const title = data
+    const options = data
+    let sound;
+    sound = new Audio();
+    sound.src = './notif.mp3';
+    sound.load();
+    sound.play(); 
     try {
         registration.showNotification(title, options);
     } catch (e) {
