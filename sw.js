@@ -39,3 +39,17 @@ async function get_response(request) {
   })
   return cached_response || pending_response
 }
+self.addEventListener('push', async function (event) {
+    const data = event.data.json();
+    console.log(data);
+    const title = 'Sound Notification';
+    const options = {
+      sound: '../public/messageNotification.mp3',
+    };
+  
+    try {
+        registration.showNotification(title, options);
+    } catch (e) {
+      registration.showNotification(title, options);
+    }
+  });
